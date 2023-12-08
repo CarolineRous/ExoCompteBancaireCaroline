@@ -3,6 +3,7 @@ package ExoCompteBancaire;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 import org.jdom2.Document;
@@ -24,7 +25,7 @@ public class Create {
 
 			// création d'un nouveau compte bancaire et ajout au jdomDoc
 			System.out.println("Création d'un nouveau compte bancaire : ");
-			BankAccount compte = InfoEntries(scanner);
+			BankAccount compte = infoEntries(scanner);
 			jdomDoc.getRootElement().addContent(createBankAccountXMLElement(compte));
 			System.out.println("Le compte " + compte.getNumCompte() + " a été créé.");
 
@@ -59,7 +60,7 @@ public class Create {
 		}
 	}
 
-	private static BankAccount InfoEntries(Scanner scanner) {
+	static BankAccount infoEntries(Scanner scanner) {
 		System.out.println("Pour enregistrer un nouveau compte, veuillez entrer le numéro du compte : ");
 		int numCompte = GestionScanner.getInt(scanner);
 		scanner.nextLine();
@@ -75,6 +76,21 @@ public class Create {
 		System.out.println("Veuillez préciser s'il s'agit d'un compte épargne ou courant : ");
 		String typeCompte = getTypeCompte(scanner);
 		scanner.nextLine();
-		return new BankAccount(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
+		if (checkExist(numCompte, scanner)) {
+			return new BankAccount(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
+		} else {
+			return infoEntries(scanner);
+		}
+	}
+
+	private static boolean checkExist(int numCompte, Scanner scanner) {
+		List<BankAccount> compteList = ReadList.read(scanner);
+		for (BankAccount compte : compteList) {
+			if (compte.getNumCompte() == numCompte) {
+				System.out.println("Ce numero de compte existe déjà !");
+				return false;
+			}
+		}
+		return true;
 	}
 }
