@@ -53,15 +53,25 @@ public class ReadList {
 		System.out.println("Liste des comptes bancaires courants : tapez 2.");
 		System.out.println("Liste des comptes bancaires épargnes : tapez 3.");
 		int choice = getChoice(scanner);
-		switch choice {
-		case 1: {for (CompteBancaire compte : compteList) {
-			System.out.println(compte);
-		}}
+		switch (choice) {
+		case 1:
+			for (CompteBancaire compte : compteList) {
+				System.out.println(compte);
+			}
+			break;
+		case 2:
+			for (CompteBancaire compte : compteList) {
+				if (compte.isCourant()) {
+					System.out.println(compte);
+				}
+			}
+			break;
+
 		}
 		for (CompteBancaire compte : compteList) {
 			System.out.println(compte);
 		}
-		
+
 	}
 
 	private static int getChoice(Scanner scanner) {
