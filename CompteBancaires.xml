@@ -1,38 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CompteBancaires>
-  <CompteBancaire>
-    <numCompte>105</numCompte>
+  <BankAccount>
+    <numCompte>156</numCompte>
     <nomPropriétaire>Caroline</nomPropriétaire>
-    <solde>4500.0</solde>
-    <dateCreation>1993-10-04</dateCreation>
+    <solde>14500.0</solde>
+    <dateCreation>2023-12-08</dateCreation>
     <typeCompte>courant</typeCompte>
-  </CompteBancaire>
-  <CompteBancaire>
-    <numCompte>666</numCompte>
-    <nomPropriétaire>Romane</nomPropriétaire>
-    <solde>666.0</solde>
-    <dateCreation>2023-12-01</dateCreation>
-    <typeCompte>épargne</typeCompte>
-  </CompteBancaire>
-  <CompteBancaire>
-    <numCompte>487</numCompte>
-    <nomPropriétaire>Kira</nomPropriétaire>
-    <solde>10000.0</solde>
-    <dateCreation>2019-02-25</dateCreation>
-    <typeCompte>épargne</typeCompte>
-  </CompteBancaire>
-  <CompteBancaire>
-    <numCompte>621</numCompte>
-    <nomPropriétaire>Mew</nomPropriétaire>
-    <solde>-10.0</solde>
-    <dateCreation>2019-03-25</dateCreation>
-    <typeCompte>courant</typeCompte>
-  </CompteBancaire>
-  <CompteBancaire>
-    <numCompte>874</numCompte>
-    <nomPropriétaire>Gilles</nomPropriétaire>
-    <solde>456125.0</solde>
-    <dateCreation>2023-11-12</dateCreation>
-    <typeCompte>épargne</typeCompte>
-  </CompteBancaire>
+  </BankAccount>
+  <BankAccount>
+    <numCompte>123</numCompte>
+    <nomPropriétaire>gilles</nomPropriétaire>
+    <solde>2.0</solde>
+    <dateCreation>0203-12-21</dateCreation>
+    <typeCompte>epargne</typeCompte>
+  </BankAccount>
 </CompteBancaires>

@@ -10,8 +10,7 @@ public class BankAccount {
 	LocalDate dateCreation;
 	String typeCompte;
 
-	public BankAccount(int numCompte, String nomPropriétaire, double solde, LocalDate dateCreation,
-			String typeCompte) {
+	public BankAccount(int numCompte, String nomPropriétaire, double solde, LocalDate dateCreation, String typeCompte) {
 		super();
 		this.numCompte = numCompte;
 		this.nomPropriétaire = nomPropriétaire;
@@ -22,6 +21,15 @@ public class BankAccount {
 
 	public BankAccount() {
 		super();
+	}
+
+	public BankAccount(BankAccount compte) {
+		super();
+		this.numCompte = compte.numCompte;
+		this.nomPropriétaire = compte.nomPropriétaire;
+		this.solde = compte.solde;
+		this.dateCreation = compte.dateCreation;
+		this.typeCompte = compte.typeCompte;
 	}
 
 	public int getNumCompte() {

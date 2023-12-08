@@ -24,12 +24,13 @@ public class Delete {
 			for (BankAccount compte : compteList) {
 				if (compte.getNumCompte() != numCompte) {
 					jdomdoc.getRootElement().addContent(Create.createBankAccountXMLElement(compte));
-					System.out.println("Le compte " + numCompte + " a été supprimé.");
 					i = 1;
 				}
 			}
 			if (i == 0) {
 				System.out.println("Le compte " + numCompte + " n'existe pas.");
+			} else if (i == 1) {
+				System.out.println("Le compte " + numCompte + " a été supprimé.");
 			}
 
 			// sérialisation du fichier XML

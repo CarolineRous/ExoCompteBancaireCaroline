@@ -34,7 +34,7 @@ public class ReadList {
 			break;
 		case 3:
 			for (BankAccount compte : compteList) {
-				if (compte.getTypeCompte().equals("épargne")) {
+				if (compte.getTypeCompte().equals("epargne")) {
 					System.out.println(compte);
 				}
 			}
@@ -49,6 +49,7 @@ public class ReadList {
 		System.out.println("1. Numéro de compte");
 		System.out.println("2. Nom du propriétaire");
 		int choice = getChoiceAffichage(scanner);
+		int i = 0;
 		switch (choice) {
 		case 1:
 			System.out.println("Veuillez sasir le numéro du compte recherché : ");
@@ -56,16 +57,27 @@ public class ReadList {
 			for (BankAccount compte : compteList) {
 				if (compte.getNumCompte() == numCompte) {
 					System.out.println(compte);
+					i = 1;
 					break;
 				}
 			}
+			if (i == 0) {
+				System.out.println("Ce numéro de compte n'existe pas.");
+			}
+			break;
 		case 2:
 			System.out.println("Veuillez sasir le nom du propriétaire recherché : ");
+			scanner.nextLine();
 			String nomPropriétaire = GestionScanner.getString(scanner);
 			for (BankAccount compte : compteList) {
 				if (compte.getNomPropriétaire().equals(nomPropriétaire)) {
 					System.out.println(compte);
+					i = 1;
+					break;
 				}
+			}
+			if (i == 0) {
+				System.out.println("Ce nom de propriétaire n'existe pas.");
 			}
 			break;
 		}
@@ -101,7 +113,7 @@ public class ReadList {
 				compte.setNumCompte(Integer.parseInt(compteElement.getChildText("numCompte")));
 				compte.setNomPropriétaire(compteElement.getChildText("nomPropriétaire"));
 				compte.setSolde(Double.parseDouble(compteElement.getChildText("solde")));
-				compte.setDateCreation(fromStringToLocalDate(compteElement.getChildText("dateCreation")));
+				compte.setDateCreation(LocalDate.parse(compteElement.getChildText("dateCreation")));
 				compte.setTypeCompte(compteElement.getChildText("typeCompte"));
 				compteList.add(compte);
 			}
@@ -109,14 +121,6 @@ public class ReadList {
 			e.printStackTrace();
 		}
 		return compteList;
-	}
-
-	private static LocalDate fromStringToLocalDate(String stringDate) {
-		char[] charList = stringDate.toCharArray();
-		int year = Integer.parseInt("" + charList[0] + charList[1] + charList[2] + charList[3]);
-		int month = Integer.parseInt("" + charList[5] + charList[6]);
-		int day = Integer.parseInt("" + charList[8] + charList[9]);
-		return LocalDate.of(year, month, day);
 	}
 
 	private static int getChoiceList(Scanner scanner) {

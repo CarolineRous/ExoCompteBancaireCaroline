@@ -53,10 +53,12 @@ public abstract class GestionScanner {
 		}
 	}
 
-	public static String getYN(Scanner scanner) {
+	public static boolean getYN(Scanner scanner) {
 		String answer = getString(scanner);
-		if (answer.equalsIgnoreCase("oui") || answer.equalsIgnoreCase("non")) {
-			return answer;
+		if (answer.equalsIgnoreCase("oui")) {
+			return true;
+		} else if (answer.equalsIgnoreCase("non")) {
+			return false;
 		} else {
 			System.err.println("Erreur de saisie. Veuillez réessayer.");
 			return getYN(scanner);

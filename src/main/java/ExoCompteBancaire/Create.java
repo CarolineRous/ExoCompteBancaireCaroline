@@ -28,6 +28,7 @@ public class Create {
 			BankAccount compte = infoEntries(scanner);
 			jdomDoc.getRootElement().addContent(createBankAccountXMLElement(compte));
 			System.out.println("Le compte " + compte.getNumCompte() + " a été créé.");
+			System.out.println(compte);
 
 			// sérialisation du fichier XML
 			XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
@@ -52,7 +53,7 @@ public class Create {
 		String typeCompte = GestionScanner.getString(scanner);
 		if (typeCompte.equalsIgnoreCase("courant")) {
 			return typeCompte;
-		} else if (typeCompte.equalsIgnoreCase("épargne")) {
+		} else if (typeCompte.equalsIgnoreCase("epargne")) {
 			return typeCompte;
 		} else {
 			System.err.println("Erreur de saisie. Veuillez réessayer.");
@@ -63,10 +64,17 @@ public class Create {
 	static BankAccount infoEntries(Scanner scanner) {
 		System.out.println("Pour enregistrer un nouveau compte, veuillez entrer le numéro du compte : ");
 		int numCompte = GestionScanner.getInt(scanner);
+		if (checkExist(numCompte, scanner)) {
+			return new BankAccount(infoEntriesNext(scanner, numCompte));
+		} else {
+			return infoEntries(scanner);
+		}
+	}
+
+	static BankAccount infoEntriesNext(Scanner scanner, int numCompte) {
 		scanner.nextLine();
 		System.out.println("Veuillez entrer le nom du propriétaire : ");
 		String nomPropriétaire = GestionScanner.getString(scanner);
-		scanner.nextLine();
 		System.out.println("Veuillez entrer le solde du compte : ");
 		Double solde = GestionScanner.getDouble(scanner);
 		scanner.nextLine();
@@ -75,12 +83,7 @@ public class Create {
 		scanner.nextLine();
 		System.out.println("Veuillez préciser s'il s'agit d'un compte épargne ou courant : ");
 		String typeCompte = getTypeCompte(scanner);
-		scanner.nextLine();
-		if (checkExist(numCompte, scanner)) {
-			return new BankAccount(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
-		} else {
-			return infoEntries(scanner);
-		}
+		return new BankAccount(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
 	}
 
 	private static boolean checkExist(int numCompte, Scanner scanner) {

@@ -13,7 +13,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>ServieGestionCompteBanque</finalName>
+		<finalName>ServiceGestionCompteBanque</finalName>
 		<plugins>
 			<plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -24,7 +24,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>com.sopra.BanqueManager</mainClass>
+              <mainClass>ExoCompteBancaire.ServiceGestionCompteBancaire</mainClass>
             </manifest>
           </archive>
         </configuration>

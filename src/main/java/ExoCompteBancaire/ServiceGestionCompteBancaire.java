@@ -14,6 +14,7 @@ public class ServiceGestionCompteBancaire {
 	public static void main(String[] args) {
 
 		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Bienvenue dans le service de gestion des comptes bancaires");
 			showMainMenu();
 			int choice = getChoice(scanner);
 			doChoice(scanner, choice);
@@ -23,17 +24,15 @@ public class ServiceGestionCompteBancaire {
 	private static void doChoice(Scanner scanner, int choice) {
 		switch (choice) {
 		case -1:
-			System.out.println("Etes-vous sûr de vouloir créer un nouveau fichier XML?");
-			System.out.println("Cette action va supprimer le contenu du fichier XML actuel et ne peut être annulée.");
-			System.out.println("1. Oui");
-			System.out.println("2. Non");
-			String answer = GestionScanner.getYN(scanner);
-			if (answer.equals("1")) {
+			System.out.println("Etes-vous sûr de vouloir créer un nouveau fichier XML? Oui / Non ?");
+			System.out.println(
+					"ATTENTION : Cette action va supprimer le contenu du fichier XML actuel et ne peut être annulée.");
+			if (GestionScanner.getYN(scanner)) {
 				XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
 				Document doc = new Document();
 				doc.setRootElement(new Element("CompteBancaires"));
 				try {
-					xmlOutput.output(doc, new FileWriter("CompteBancaires.xml"));
+					xmlOutput.output(doc, new FileWriter("target/CompteBancaires.xml"));
 				} catch (IOException io) {
 					System.out.println(io.getMessage());
 				}
@@ -74,7 +73,6 @@ public class ServiceGestionCompteBancaire {
 	}
 
 	private static void showMainMenu() {
-		System.out.println("Bienvenue dans le service de gestion des comptes bancaires");
 		System.out.println("Que souhaitez-vous faire ? ");
 		System.out.println("-1. Création du fichier XML");
 		System.out.println("0. Quitter");
@@ -87,6 +85,7 @@ public class ServiceGestionCompteBancaire {
 
 	private static int getChoice(Scanner scanner) {
 		int choice = GestionScanner.getInt(scanner);
+		scanner.nextLine();
 		if (choice == -1 || choice == 0 || choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5) {
 			return choice;
 		} else {
