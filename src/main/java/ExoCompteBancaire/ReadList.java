@@ -12,8 +12,8 @@ import org.jdom2.input.SAXBuilder;
 
 public class ReadList {
 
-	static void choixListeCompteBancaire(Scanner scanner) {
-		List<CompteBancaire> compteList = read(scanner);
+	static void selectListAccountType(Scanner scanner) {
+		List<BankAccount> compteList = read(scanner);
 		System.out.println("Veuillez choisir parmi les options suivantes : ");
 		System.out.println("Liste de tous les comptes bancaires : tapez 1 .");
 		System.out.println("Liste des comptes bancaires courants : tapez 2.");
@@ -21,19 +21,19 @@ public class ReadList {
 		int choice = getChoiceList(scanner);
 		switch (choice) {
 		case 1:
-			for (CompteBancaire compte : compteList) {
+			for (BankAccount compte : compteList) {
 				System.out.println(compte);
 			}
 			break;
 		case 2:
-			for (CompteBancaire compte : compteList) {
+			for (BankAccount compte : compteList) {
 				if (compte.getTypeCompte().equals("courant")) {
 					System.out.println(compte);
 				}
 			}
 			break;
 		case 3:
-			for (CompteBancaire compte : compteList) {
+			for (BankAccount compte : compteList) {
 				if (compte.getTypeCompte().equals("épargne")) {
 					System.out.println(compte);
 				}
@@ -44,7 +44,7 @@ public class ReadList {
 	}
 
 	public static void afficherCompteBancaire(Scanner scanner) {
-		List<CompteBancaire> compteList = read(scanner);
+		List<BankAccount> compteList = read(scanner);
 		System.out.println("Voulez vous chercher une compte par : ");
 		System.out.println("1. Numéro de compte");
 		System.out.println("2. Nom du propriétaire");
@@ -53,7 +53,7 @@ public class ReadList {
 		case 1:
 			System.out.println("Veuillez sasir le numéro du compte recherché : ");
 			int numCompte = GestionScanner.getInt(scanner);
-			for (CompteBancaire compte : compteList) {
+			for (BankAccount compte : compteList) {
 				if (compte.getNumCompte() == numCompte) {
 					System.out.println(compte);
 					break;
@@ -62,7 +62,7 @@ public class ReadList {
 		case 2:
 			System.out.println("Veuillez sasir le nom du propriétaire recherché : ");
 			String nomPropriétaire = GestionScanner.getString(scanner);
-			for (CompteBancaire compte : compteList) {
+			for (BankAccount compte : compteList) {
 				if (compte.getNomPropriétaire().equals(nomPropriétaire)) {
 					System.out.println(compte);
 				}
@@ -82,9 +82,9 @@ public class ReadList {
 		}
 	}
 
-	public static List<CompteBancaire> read(Scanner scanner) {
+	public static List<BankAccount> read(Scanner scanner) {
 		final String fileName = "CompteBancaires.xml";
-		List<CompteBancaire> compteList = new ArrayList<CompteBancaire>();
+		List<BankAccount> compteList = new ArrayList<BankAccount>();
 		try {
 			// désérialisation du ficher XML
 			SAXBuilder builder = new SAXBuilder();
@@ -93,12 +93,11 @@ public class ReadList {
 
 			// récupération de l'élément racine et tranfert dans une liste d'éléments
 			Element root = jdomDoc.getRootElement();
-			List<Element> listOfCompte = root.getChildren("CompteBancaire");
+			List<Element> listOfCompte = root.getChildren("BankAccount");
 
 			// transfert des comptes bancaires dans une liste
-
 			for (Element compteElement : listOfCompte) {
-				CompteBancaire compte = new CompteBancaire();
+				BankAccount compte = new BankAccount();
 				compte.setNumCompte(Integer.parseInt(compteElement.getChildText("numCompte")));
 				compte.setNomPropriétaire(compteElement.getChildText("nomPropriétaire"));
 				compte.setSolde(Double.parseDouble(compteElement.getChildText("solde")));

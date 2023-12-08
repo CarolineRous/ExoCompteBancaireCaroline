@@ -1,37 +1,44 @@
 package ExoCompteBancaire;
 
+import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-public class CreateWriteFromKeyboard {
+public class Create {
 
-	public static void createCompteBancaire(Scanner scanner) {
+	public static void createBankAccount(Scanner scanner) {
+
+		final String fileName = "CompteBancaires.xml";
 		try {
-			Document doc = new Document();
-			doc.setRootElement(new Element("CompteBancaires"));
+			// désérialisation du ficher XML
+			SAXBuilder builder = new SAXBuilder();
+			File xmlFile = new File(fileName);
+			Document jdomDoc = (Document) builder.build(xmlFile);
+
+			// création d'un nouveau compte bancaire et ajout au jdomDoc
 			System.out.println("Création d'un nouveau compte bancaire : ");
-			CompteBancaire compte = CreationCompteBancaireFromKeyboard(scanner);
-			doc.getRootElement().addContent(createCompteBancaireXMLElement(compte));
+			BankAccount compte = InfoEntries(scanner);
+			jdomDoc.getRootElement().addContent(createBankAccountXMLElement(compte));
 			System.out.println("Le compte " + compte.getNumCompte() + " a été créé.");
 
-			XMLOutputter xmlOutput = new XMLOutputter();
-			xmlOutput.setFormat(Format.getPrettyFormat());
-			xmlOutput.output(doc, new FileWriter("compteBancaires.xml"));
+			// sérialisation du fichier XML
+			XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+			xmlOutput.output(jdomDoc, new FileWriter("CompteBancaires.xml"));
 			System.out.println("File Saved!");
-		} catch (IOException io) {
-			System.out.println(io.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	private static Element createCompteBancaireXMLElement(CompteBancaire compte) {
-		Element compteElement = new Element("CompteBancaire");
+	static Element createBankAccountXMLElement(BankAccount compte) {
+		Element compteElement = new Element("BankAccount");
 		compteElement.addContent(new Element("numCompte").setText("" + compte.getNumCompte()));
 		compteElement.addContent(new Element("nomPropriétaire").setText(compte.getNomPropriétaire()));
 		compteElement.addContent(new Element("solde").setText("" + compte.getSolde()));
@@ -52,7 +59,7 @@ public class CreateWriteFromKeyboard {
 		}
 	}
 
-	private static CompteBancaire CreationCompteBancaireFromKeyboard(Scanner scanner) {
+	private static BankAccount InfoEntries(Scanner scanner) {
 		System.out.println("Pour enregistrer un nouveau compte, veuillez entrer le numéro du compte : ");
 		int numCompte = GestionScanner.getInt(scanner);
 		scanner.nextLine();
@@ -60,7 +67,7 @@ public class CreateWriteFromKeyboard {
 		String nomPropriétaire = GestionScanner.getString(scanner);
 		scanner.nextLine();
 		System.out.println("Veuillez entrer le solde du compte : ");
-		int solde = GestionScanner.getInt(scanner);
+		Double solde = GestionScanner.getDouble(scanner);
 		scanner.nextLine();
 		System.out.println("Veuillez entrer la date de création du compte : ");
 		LocalDate dateCreation = GestionScanner.getDate(scanner);
@@ -68,6 +75,6 @@ public class CreateWriteFromKeyboard {
 		System.out.println("Veuillez préciser s'il s'agit d'un compte épargne ou courant : ");
 		String typeCompte = getTypeCompte(scanner);
 		scanner.nextLine();
-		return new CompteBancaire(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
+		return new BankAccount(numCompte, nomPropriétaire, solde, dateCreation, typeCompte);
 	}
 }

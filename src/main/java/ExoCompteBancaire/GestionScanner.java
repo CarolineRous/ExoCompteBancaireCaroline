@@ -43,4 +43,23 @@ public abstract class GestionScanner {
 		}
 	}
 
+	static Double getDouble(Scanner scanner) {
+		try {
+			return scanner.nextDouble();
+		} catch (Exception e) {
+			scanner.nextLine();
+			System.err.println("Erreur de saisie. Veuillez réessayer.");
+			return getDouble(scanner);
+		}
+	}
+
+	public static String getYN(Scanner scanner) {
+		String answer = getString(scanner);
+		if (answer.equalsIgnoreCase("oui") || answer.equalsIgnoreCase("non")) {
+			return answer;
+		} else {
+			System.err.println("Erreur de saisie. Veuillez réessayer.");
+			return getYN(scanner);
+		}
+	}
 }

@@ -28,4 +28,11 @@
     <dateCreation>2019-03-25</dateCreation>
     <typeCompte>courant</typeCompte>
   </CompteBancaire>
+  <CompteBancaire>
+    <numCompte>874</numCompte>
+    <nomPropriétaire>Gilles</nomPropriétaire>
+    <solde>456125.0</solde>
+    <dateCreation>2023-11-12</dateCreation>
+    <typeCompte>épargne</typeCompte>
+  </CompteBancaire>
 </CompteBancaires>

@@ -3,14 +3,14 @@ package ExoCompteBancaire;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class CompteBancaire {
+public class BankAccount {
 	int numCompte;
 	String nomPropriétaire;
 	double solde;
 	LocalDate dateCreation;
 	String typeCompte;
 
-	public CompteBancaire(int numCompte, String nomPropriétaire, double solde, LocalDate dateCreation,
+	public BankAccount(int numCompte, String nomPropriétaire, double solde, LocalDate dateCreation,
 			String typeCompte) {
 		super();
 		this.numCompte = numCompte;
@@ -20,7 +20,7 @@ public class CompteBancaire {
 		this.typeCompte = typeCompte;
 	}
 
-	public CompteBancaire() {
+	public BankAccount() {
 		super();
 	}
 
@@ -66,7 +66,7 @@ public class CompteBancaire {
 
 	@Override
 	public String toString() {
-		return "CompteBancaire [numCompte=" + numCompte + ", nomPropriétaire=" + nomPropriétaire + ", solde=" + solde
+		return "BankAccount [numCompte=" + numCompte + ", nomPropriétaire=" + nomPropriétaire + ", solde=" + solde
 				+ ", dateCreation=" + dateCreation + ", typeCompte=" + typeCompte + "]";
 	}
 
@@ -78,7 +78,7 @@ public class CompteBancaire {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CompteBancaire other = (CompteBancaire) obj;
+		BankAccount other = (BankAccount) obj;
 		return Objects.equals(nomPropriétaire, other.nomPropriétaire) && numCompte == other.numCompte;
 	}
 
