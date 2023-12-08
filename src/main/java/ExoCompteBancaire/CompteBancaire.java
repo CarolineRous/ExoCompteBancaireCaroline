@@ -71,11 +71,6 @@ public class CompteBancaire {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(numCompte);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -84,7 +79,7 @@ public class CompteBancaire {
 		if (getClass() != obj.getClass())
 			return false;
 		CompteBancaire other = (CompteBancaire) obj;
-		return numCompte == other.numCompte;
+		return Objects.equals(nomPropriétaire, other.nomPropriétaire) && numCompte == other.numCompte;
 	}
 
 }
