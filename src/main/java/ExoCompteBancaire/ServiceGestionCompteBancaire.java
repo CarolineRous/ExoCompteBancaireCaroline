@@ -1,15 +1,11 @@
 package ExoCompteBancaire;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-
 public class ServiceGestionCompteBancaire {
+
+//	Runtime runtime = Runtime.getRuntime();
+//	System.out.println("Used Memory:" + (runtime.totalMemory() - runtime.freeMemory()) / 1024 + " Ko")
 
 	public static void main(String[] args) {
 
@@ -24,20 +20,7 @@ public class ServiceGestionCompteBancaire {
 	private static void doChoice(Scanner scanner, int choice) {
 		switch (choice) {
 		case -1:
-			System.out.println("Etes-vous sûr de vouloir créer un nouveau fichier XML? Oui / Non ?");
-			System.out.println(
-					"ATTENTION : Cette action va supprimer le contenu du fichier XML actuel et ne peut être annulée.");
-			if (GestionScanner.getYN(scanner)) {
-				XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
-				Document doc = new Document();
-				doc.setRootElement(new Element("CompteBancaires"));
-				try {
-					xmlOutput.output(doc, new FileWriter("target/CompteBancaires.xml"));
-				} catch (IOException io) {
-					System.out.println(io.getMessage());
-				}
-				System.out.println("Fichier XML créé");
-			}
+			AdminMenu.DoAdminMenu(scanner);
 			showMainMenu();
 			choice = getChoice(scanner);
 			doChoice(scanner, choice);
@@ -74,7 +57,7 @@ public class ServiceGestionCompteBancaire {
 
 	private static void showMainMenu() {
 		System.out.println("Que souhaitez-vous faire ? ");
-		System.out.println("-1. Création du fichier XML");
+		System.out.println("-1. Menu administrateur");
 		System.out.println("0. Quitter");
 		System.out.println("1. Créer un compte bancaire");
 		System.out.println("2. Afficher un compte bancaire");

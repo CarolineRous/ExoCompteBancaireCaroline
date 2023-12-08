@@ -95,7 +95,7 @@ public class ReadList {
 	}
 
 	public static List<BankAccount> read(Scanner scanner) {
-		final String fileName = "CompteBancaires.xml";
+		final String fileName = "target/CompteBancaires.xml";
 		List<BankAccount> compteList = new ArrayList<BankAccount>();
 		try {
 			// désérialisation du ficher XML

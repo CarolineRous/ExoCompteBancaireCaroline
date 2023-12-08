@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CompteBancaires>
-  <BankAccount>
-    <numCompte>156</numCompte>
-    <nomPropriétaire>Caroline</nomPropriétaire>
+  <BankAccount typeBanque="Physique">
+    <numCompte>123</numCompte>
+    <nomPropriétaire>caroline</nomPropriétaire>
     <solde>14500.0</solde>
     <dateCreation>2023-12-08</dateCreation>
     <typeCompte>courant</typeCompte>
-  </BankAccount>
-  <BankAccount>
-    <numCompte>123</numCompte>
-    <nomPropriétaire>gilles</nomPropriétaire>
-    <solde>2.0</solde>
-    <dateCreation>0203-12-21</dateCreation>
-    <typeCompte>epargne</typeCompte>
   </BankAccount>
 </CompteBancaires>

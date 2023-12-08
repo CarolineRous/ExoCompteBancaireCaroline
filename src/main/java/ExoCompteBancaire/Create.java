@@ -16,7 +16,7 @@ public class Create {
 
 	public static void createBankAccount(Scanner scanner) {
 
-		final String fileName = "CompteBancaires.xml";
+		final String fileName = "target/CompteBancaires.xml";
 		try {
 			// désérialisation du ficher XML
 			SAXBuilder builder = new SAXBuilder();
@@ -32,7 +32,7 @@ public class Create {
 
 			// sérialisation du fichier XML
 			XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
-			xmlOutput.output(jdomDoc, new FileWriter("CompteBancaires.xml"));
+			xmlOutput.output(jdomDoc, new FileWriter("target/CompteBancaires.xml"));
 			System.out.println("File Saved!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,8 +78,7 @@ public class Create {
 		System.out.println("Veuillez entrer le solde du compte : ");
 		Double solde = GestionScanner.getDouble(scanner);
 		scanner.nextLine();
-		System.out.println("Veuillez entrer la date de création du compte : ");
-		LocalDate dateCreation = GestionScanner.getDate(scanner);
+		LocalDate dateCreation = LocalDate.now();
 		scanner.nextLine();
 		System.out.println("Veuillez préciser s'il s'agit d'un compte épargne ou courant : ");
 		String typeCompte = getTypeCompte(scanner);
