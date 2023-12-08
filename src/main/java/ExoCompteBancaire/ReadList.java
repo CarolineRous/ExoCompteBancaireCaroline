@@ -1,6 +1,7 @@
 package ExoCompteBancaire;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -28,14 +29,18 @@ public class ReadList {
 
 			for (Element compteElement : listOfCompte) {
 				CompteBancaire compte = new CompteBancaire();
-				compte.setNumCompte(Integer.parseInt(compteElement.getChildText("NumCompte")));
-				compte.setNomPropriétaire(compteElement.getChildText("NomPropriétaire"));
-				compte.setSolde(Double.parseDouble(compteElement.getChildText("Solde")));
-				compte.setDateCreation(fromStringToLocalDate(compteElement.getChildText("DateCreation")));
-				compte.setTypeCompte(compteElement.getChildText("TypeCompte"));
-
+				compte.setNumCompte(Integer.parseInt(compteElement.getChildText("numCompte")));
+				compte.setNomPropriétaire(compteElement.getChildText("nomPropriétaire"));
+				compte.setSolde(Double.parseDouble(compteElement.getChildText("solde")));
+				compte.setDateCreation(fromStringToLocalDate(compteElement.getChildText("dateCreation")));
+				compte.setTypeCompte(compteElement.getChildText("typeCompte"));
 				compteList.add(compte);
 			}
+
+//			// affichage de la liste des comptes bancaires
+//            for (CompteBancaire compte : compteList) {
+//                System.out.println(compte);
+//            }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,6 +50,14 @@ public class ReadList {
 		try (Scanner scanner = new Scanner(System.in)) {
 			choixListeCompteBancaire(scanner, compteList);
 		}
+	}
+
+	private static LocalDate fromStringToLocalDate(String stringDate) {
+		char[] charList = stringDate.toCharArray();
+		int year = Integer.parseInt("" + charList[0] + charList[1] + charList[2] + charList[3]);
+		int month = Integer.parseInt("" + charList[5] + charList[6]);
+		int day = Integer.parseInt("" + charList[8] + charList[9]);
+		return LocalDate.of(year, month, day);
 	}
 
 	private static void choixListeCompteBancaire(Scanner scanner, List<CompteBancaire> compteList) {
@@ -61,25 +74,28 @@ public class ReadList {
 			break;
 		case 2:
 			for (CompteBancaire compte : compteList) {
-				if (compte.isCourant()) {
+				if (compte.getTypeCompte().equals("courant")) {
 					System.out.println(compte);
 				}
 			}
 			break;
-
+		case 3:
+			for (CompteBancaire compte : compteList) {
+				if (compte.getTypeCompte().equals("épargne")) {
+					System.out.println(compte);
+				}
+			}
+			break;
 		}
-		for (CompteBancaire compte : compteList) {
-			System.out.println(compte);
-		}
-
+		System.out.println("Fin de la liste des comptes bancaires.");
 	}
 
 	private static int getChoice(Scanner scanner) {
 		int choice = getInt(scanner);
 		if (choice == 1 || choice == 2 || choice == 3) {
-			return scanner.nextInt();
+			return choice;
 		} else {
-			System.err.println("Erreur de saisie. Veuillez saisr un choix correct.");
+			System.err.println("Erreur de saisie. Veuillez saisir un choix correct.");
 			return getChoice(scanner);
 		}
 
@@ -89,7 +105,6 @@ public class ReadList {
 		try {
 			return scanner.nextInt();
 		} catch (Exception e) {
-			scanner.nextLine();
 			System.err.println("Erreur de saisie. Veuillez réessayer.");
 			return getInt(scanner);
 		}

@@ -1,6 +1,7 @@
 package ExoCompteBancaire;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class CompteBancaire {
 	int numCompte;
@@ -67,6 +68,23 @@ public class CompteBancaire {
 	public String toString() {
 		return "CompteBancaire [numCompte=" + numCompte + ", nomPropriétaire=" + nomPropriétaire + ", solde=" + solde
 				+ ", dateCreation=" + dateCreation + ", typeCompte=" + typeCompte + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numCompte);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CompteBancaire other = (CompteBancaire) obj;
+		return numCompte == other.numCompte;
 	}
 
 }
