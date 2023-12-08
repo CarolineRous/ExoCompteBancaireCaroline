@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompteBancaires>
+  <CompteBancaire>
+    <numCompte>105</numCompte>
+    <nomPropriétaire>Caroline</nomPropriétaire>
+    <solde>4500.0</solde>
+    <dateCreation>1993-10-04</dateCreation>
+    <typeCompte>courant</typeCompte>
+  </CompteBancaire>
+  <CompteBancaire>
+    <numCompte>666</numCompte>
+    <nomPropriétaire>Romane</nomPropriétaire>
+    <solde>666.0</solde>
+    <dateCreation>2023-12-01</dateCreation>
+    <typeCompte>épargne</typeCompte>
+  </CompteBancaire>
+  <CompteBancaire>
+    <numCompte>487</numCompte>
+    <nomPropriétaire>Kira</nomPropriétaire>
+    <solde>10000.0</solde>
+    <dateCreation>2019-02-25</dateCreation>
+    <typeCompte>épargne</typeCompte>
+  </CompteBancaire>
+  <CompteBancaire>
+    <numCompte>621</numCompte>
+    <nomPropriétaire>Mew</nomPropriétaire>
+    <solde>-10.0</solde>
+    <dateCreation>2019-03-25</dateCreation>
+    <typeCompte>courant</typeCompte>
+  </CompteBancaire>
+</CompteBancaires>
